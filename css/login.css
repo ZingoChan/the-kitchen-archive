@@ -1,0 +1,76 @@
+body {
+  background-color: black;
+  color: white;
+  min-height: 100vh;
+  background-image:
+    /* linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.82)), */
+    url("../img/bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.navbar-nav .nav-link {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.nav-link.active {
+  font-weight: 600;
+}
+
+.recipe-card {
+  min-width: 250px;
+  flex-shrink: 0;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.auth-shell {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-panel {
+  width: min(100%, 560px);
+  padding: 40px 36px;
+  border-radius: 28px;
+  background: rgb(0, 0, 0);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.auth-logo-link {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.auth-logo {
+  width: min(220px, 60%);
+  height: auto;
+}
+
+.auth-panel .form-control {
+  background-color: rgba(255, 255, 255, 0.96);
+}
+
+.auth-panel .btn-dark {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+@media (max-width: 576px) {
+  .auth-panel {
+    width: min(100%, 460px);
+    padding: 28px 20px;
+    border-radius: 22px;
+  }
+}

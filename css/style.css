@@ -1,0 +1,124 @@
+body
+{
+  background-color: black;
+  color: white; 
+}
+
+.navbar-nav .nav-link {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.navbar-search-form {
+  flex: 1 1 auto;
+  margin: 0 35px;
+  max-width: 720px;
+  min-width: 0;
+}
+
+.navbar-search-group {
+  margin-bottom: 0 !important;
+}
+
+.navbar-search-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px 0 0 999px;
+  border-right: 0;
+  color: white;
+  min-height: 42px;
+  padding-inline: 1rem;
+}
+
+.navbar-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.navbar-search-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #f3b33d;
+  box-shadow: none;
+  color: white;
+}
+
+.navbar-search-button {
+  align-items: center;
+  background: #f3b33d;
+  border: 1px solid #f3b33d;
+  border-radius: 0 999px 999px 0;
+  display: inline-flex;
+  justify-content: center;
+  min-width: 52px;
+  padding-inline: 0.95rem;
+}
+
+.navbar-search-button:hover {
+  background: #ffca66;
+  border-color: #ffca66;
+}
+
+.navbar-search-button:focus {
+  box-shadow: 0 0 0 0.2rem rgba(243, 179, 61, 0.25);
+}
+
+.navbar-search-button img {
+  display: block;
+  height: 16px;
+  width: 16px;
+}
+
+.nav-link.active {
+  font-weight: 600;
+}
+
+.recipe-card {
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-title{
+  font-weight:600;
+  letter-spacing:0.5px;
+}
+
+.card-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.card-img-overlay {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.85),
+    rgba(0,0,0,0.4),
+    rgba(0,0,0,0)
+  );
+
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.card:hover .card-img-overlay {
+  opacity: 1;
+}
+
+.card:hover .card-img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 991.98px) {
+  .navbar-search-form {
+    margin: 1rem 0 0;
+    max-width: none;
+    width: 100%;
+  }
+}

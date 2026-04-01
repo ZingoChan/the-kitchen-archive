@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe | The Kitchen Archive</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/meal.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark navbar-expand-lg bg-black">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html"><img src="../static/img/logo-black.png"
+                    alt="The Kitchen Archive" height="40px" width="auto"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="#navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="randomMeal()">Random</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ingredients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Area</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create.html">Create</a>
+                    </li>
+                </ul>
+                <form class="navbar-search-form w-100" role="search">
+                    <div class="input-group navbar-search-group mb-0">
+                        <input type="search" class="form-control navbar-search-input"
+                            placeholder="Find Your Recipe..." aria-label="Find your recipe"
+                            aria-describedby="navbar-search-button">
+                        <button class="btn navbar-search-button" type="submit" id="navbar-search-button">
+                            <img src="../static/themify-icons/SVG/search.svg" alt="Search">
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="d-flex ms-3 align-items-center">
+                <div id="auth-links-login">
+                    <a href="login.html" class="btn btn-outline-light me-2 rounded-pill">Login</a>
+                </div>
+                <div id="auth-links-register">
+                    <a href="signup.html" class="btn btn-light rounded-pill">Sign Up</a>
+                </div>
+
+                <div id="user-area" class="d-none d-flex align-items-center gap-2">
+                    <a href="profile.html" class="d-flex align-items-center gap-2 text-decoration-none text-white">
+                        <img id="nav-pfp" src="" width="36" height="36"
+                            style="border-radius:50%; object-fit:cover; border: 2px solid white;">
+                        <span id="nav-username"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container recipe-shell py-5">
+        <section class="recipe-hero-card mb-4">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-7">
+                    <p class="recipe-kicker mb-2">Kitchen Archive Entry</p>
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                        <span id="category" class="recipe-tag">N/A</span>
+                        <span id="area" class="recipe-tag">N/A</span>
+                    </div>
+                    <h1 id="name" class="recipe-title mb-3">[Placeholder Name]</h1>
+                    <p id="recipe-summary" class="recipe-summary mb-4">A clean and readable recipe page with a little more structure.</p>
+
+                    <div class="d-flex flex-wrap gap-3 text-white-50 small mb-4">
+                        <span id="author">Author: N/A</span>
+                        <span id="date">Modified: N/A</span>
+                    </div>
+
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <button id="favorite-btn" type="button" class="btn btn-outline-warning rounded-pill">
+                            Favorite This Meal
+                        </button>
+                        <button id="save-json-btn" type="button" class="btn btn-outline-light rounded-pill">
+                            Save JSON
+                        </button>
+                    </div>
+                    <small id="favorite-message" class="d-block text-white-50 mt-2"></small>
+                    <small id="recipe-json-message" class="d-block text-white-50 mt-1">
+                        Save the current recipe as a JSON file to keep or share later.
+                    </small>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="recipe-hero-image-wrap">
+                        <img id="thumbnail" class="recipe-hero-image" alt="Meal image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <section class="recipe-section-card mb-4">
+                    <div class="recipe-section-header">
+                        <h3 class="mb-0">Instructions</h3>
+                    </div>
+                    <ol id="instructions" class="recipe-instruction-list mb-0">The author has not added any instructions</ol>
+                </section>
+
+                <section class="recipe-section-card">
+                    <div class="recipe-section-header">
+                        <h3 class="mb-0">Video</h3>
+                    </div>
+                    <div id="video-fallback" class="text-white-50 small mb-3 d-none">No video available for this recipe.</div>
+                    <iframe id="video" width="100%" class="recipe-video-frame" src="" frameborder="0"
+                        allowfullscreen></iframe>
+                </section>
+            </div>
+
+            <div class="col-lg-4">
+                <aside class="recipe-section-card mb-4">
+                    <div class="recipe-section-header">
+                        <h3 class="mb-0">Information</h3>
+                    </div>
+                    <div class="recipe-fact-list">
+                        <div class="recipe-fact-item">
+                            <span class="recipe-fact-label">Category</span>
+                            <span id="info-category" class="recipe-fact-value">N/A</span>
+                        </div>
+                        <div class="recipe-fact-item">
+                            <span class="recipe-fact-label">Cuisine</span>
+                            <span id="info-area" class="recipe-fact-value">N/A</span>
+                        </div>
+                        <div class="recipe-fact-item">
+                            <span class="recipe-fact-label">Author</span>
+                            <span id="info-author" class="recipe-fact-value">N/A</span>
+                        </div>
+                        <div class="recipe-fact-item">
+                            <span class="recipe-fact-label">Favorited</span>
+                            <span id="favorite-count" class="recipe-fact-value">0</span>
+                        </div>
+                        <div class="recipe-fact-item">
+                            <span class="recipe-fact-label">Last Updated</span>
+                            <span id="info-date" class="recipe-fact-value">N/A</span>
+                        </div>
+                        <div class="recipe-fact-item">
+                            <span class="recipe-fact-label">Ingredients</span>
+                            <span id="ingredient-count" class="recipe-fact-value">0</span>
+                        </div>
+                    </div>
+                </aside>
+
+                <section class="recipe-section-card">
+                    <div class="recipe-section-header">
+                        <h3 class="mb-0">Ingredients</h3>
+                    </div>
+                    <div id="ingredients"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bd-footer py-4 py-md-5 mt-5 bg-dark text-white">
+        <div class="container py-4 py-md-5 px-4 px-md-3">
+            <div class="row justify-content-center">
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://getbootstrap.com/">Home</a></li>
+                        <li class="mb-2"><a href="../../index.html">Docs</a></li>
+                        <li class="mb-2"><a href="../../examples/index.html">Examples</a></li>
+                        <li class="mb-2"><a href="https://icons.getbootstrap.com/">Icons</a></li>
+                        <li class="mb-2"><a href="https://themes.getbootstrap.com/">Themes</a></li>
+                        <li class="mb-2"><a href="https://blog.getbootstrap.com/">Blog</a></li>
+                        <li class="mb-2"><a href="https://cottonbureau.com/people/bootstrap">Swag Store</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Guides</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="../index.html">Getting started</a></li>
+                        <li class="mb-2"><a href="../../examples/starter-template/index.html">Starter template</a></li>
+                        <li class="mb-2"><a href="../webpack/index.html">Webpack</a></li>
+                        <li class="mb-2"><a href="../parcel/index.html">Parcel</a></li>
+                        <li class="mb-2"><a href="../vite/index.html">Vite</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Projects</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://github.com/twbs/bootstrap">Bootstrap 5</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/bootstrap/tree/v4-dev">Bootstrap 4</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/icons">Icons</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/rfs">RFS</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/examples/">Examples repo</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Community</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://github.com/twbs/bootstrap/issues">Issues</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/bootstrap/discussions">Discussions</a></li>
+                        <li class="mb-2"><a href="https://github.com/sponsors/twbs">Corporate sponsors</a></li>
+                        <li class="mb-2"><a href="https://opencollective.com/bootstrap">Open Collective</a></li>
+                        <li class="mb-2"><a href="https://stackoverflow.com/questions/tagged/bootstrap-5">Stack Overflow</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/meal.js"></script>
+    <script src="../static/js/regcheck.js"></script>
+
+</body>
+
+</html>

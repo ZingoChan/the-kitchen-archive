@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | The Kitchen Archive</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/login.css">
+</head>
+
+<body>
+
+    <main class="auth-page signup-page">
+        <div class="auth-shell">
+            <div class="auth-panel text-light">
+                <a href="../index.html" class="auth-logo-link">
+                    <img src="../static/img/logo-black.png" class="auth-logo" alt="The Kitchen Archive logo">
+                </a>
+
+                <form id="signup">
+                    <h2 class="mb-4 text-center">Create Your New Account For Free!</h2>
+                    <p class="mb-4 text-center">Explore more new features and share your ideas, knowledge to Millions of Users!<br> No credit card required*</p>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Username" placeholder="">
+                        <label for="floatingInput">Username</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="Email" placeholder="">
+                        <label for="floatingPassword">Email Address</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="Password" placeholder="">
+                        <label for="floatingInput">Password</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="ConfirmPassword" placeholder="">
+                        <label for="floatingPassword">Confirm Password</label>
+                    </div>
+
+                    <div id="liveAlertPlaceholder" class="mb-3"></div>
+                    <button class="btn btn-warning w-100 py-3 mt-3" type="submit">Create Account</button>
+
+                    <p class="text-center mt-3">Already made one? <a href="login.html" class="text-light"
+                            style="text-decoration: none;"><strong>Sign In</strong></a></p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="../static/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/signup.js"></script>
+</body>
+
+</html>

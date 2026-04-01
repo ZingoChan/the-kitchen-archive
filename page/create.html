@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe | The Kitchen Archive</title>
+
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-icons-1.13.1/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../static/css/meal.css">
+    <link rel="stylesheet" href="../static/css/create.css">
+</head>
+
+<body class="ui-page-dark">
+
+    <nav class="navbar navbar-dark navbar-expand-lg bg-black">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html"><img src="../static/img/logo-black.png"
+                    alt="The Kitchen Archive" height="40px" width="auto"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="randomMeal()">Random</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ingredients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Area</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="category.html">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="create.html">Create</a>
+                    </li>
+                </ul>
+                <form class="navbar-search-form w-100" role="search">
+                    <div class="input-group navbar-search-group mb-0">
+                        <input type="search" class="form-control navbar-search-input"
+                            placeholder="Find Your Recipe..." aria-label="Find your recipe"
+                            aria-describedby="navbar-search-button">
+                        <button class="btn navbar-search-button" type="submit" id="navbar-search-button">
+                            <img src="../static/themify-icons/SVG/search.svg" alt="Search">
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="d-flex ms-3 align-items-center">
+                <div id="auth-links-login">
+                    <a href="login.html" class="btn btn-outline-light me-2 rounded-pill">Login</a>
+                </div>
+                <div id="auth-links-register">
+                    <a href="signup.html" class="btn btn-light rounded-pill">Sign Up</a>
+                </div>
+
+                <div id="user-area" class="d-none d-flex align-items-center gap-2">
+                    <a href="profile.html" class="d-flex align-items-center gap-2 text-decoration-none text-white">
+                        <img id="nav-pfp" src="" width="36" height="36"
+                            style="border-radius:50%; object-fit:cover; border: 2px solid white;">
+                        <span id="nav-username"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-5 ">
+        <form id="create-recipe">
+            <div class="ui-create-layout">
+                <div id="createAlertPlaceholder" class="mb-4"></div>
+
+                <div class="ui-create-header mb-4">
+                    <!-- <p class="ui-kicker mb-2">New Recipe</p> -->
+                    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-start gap-3">
+                        <div>
+                            <h1 class="ui-create-title mb-2">Create a new recipe</h1>
+                            <p class="ui-muted mb-0">Give your dish a name, add the essentials, then build the ingredient list.</p>
+                        </div>
+                        <button class="btn btn-warning rounded-pill px-4 ui-action-strong justify-content-center" type="button"
+                            data-bs-toggle="offcanvas" data-bs-target="#ingredientsPanel" aria-controls="ingredientsPanel">
+                            Manage Ingredients
+                        </button>
+                    </div>
+                </div>
+
+                
+
+                <!-- <div class="ui-form-section align-items-center">
+                    <div class="ui-form-section-head">
+                        <h2 class="ui-section-title mb-1">Recipe name</h2>
+                        <p class="ui-help-text mb-0">This is how your recipe will appear in the archive.</p>
+                    </div>
+                    <div class="ui-form-section-body">
+                        <input id="recipe-name" type="text" class="form-control form-control-lg ui-input"
+                            placeholder="Ex: Chili garlic noodles">
+                    </div>
+                </div>
+
+                <div class="ui-form-section align-items-center">
+                    <div class="ui-form-section-head">
+                        <h2 class="ui-section-title mb-1">Cover image</h2>
+                        <p class="ui-help-text mb-0">Add a thumbnail so your recipe feels complete.</p>
+                    </div>
+                    <div class="ui-form-section-body">
+                        <div class="ui-cover-upload">
+                            <label for="meal-thumbnail-file" class="ui-cover-upload-button">
+                                <span class="ui-cover-upload-icon"><i class="bi bi-image" aria-hidden="true"></i></span>
+                                <span>Add cover image</span>
+                            </label>
+                            <input id="meal-thumbnail-file" type="file" class="d-none" accept="image/*">
+                            <p class="ui-help-text mb-0">Recommended size: 460 by 200 pixels</p>
+                        </div>
+                        <div id="mealThumbnailPreviewCard" class="ui-cover-preview d-none mt-3">
+                            <img id="mealThumbnailPreview" class="ui-cover-preview-image" src="../static/img/bg.jpg"
+                                alt="Meal thumbnail preview">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-form-section align-items-center">
+                    <div class="ui-form-section-head">
+                        <h2 class="ui-section-title mb-1">Short description</h2>
+                        <p class="ui-help-text mb-0">A quick summary helps people know what to expect.</p>
+                    </div>
+                    <div class="ui-form-section-body">
+                        <input id="recipe-description" type="text" class="form-control ui-input"
+                            placeholder="Ex: Chili garlic noodles is a very famous dish of the Mexican cuisine...">
+                    </div>
+                </div>
+
+                <div class="ui-form-section align-items-center">
+                    <div class="ui-form-section-head">
+                        <h2 class="ui-section-title mb-1">Instructions</h2>
+                        <p class="ui-help-text mb-0">Write clear steps so someone else can successfully cook it.</p>
+                    </div>
+                    <div class="ui-form-section-body">
+                        <textarea id="recipe-instructions" class="form-control ui-input ui-textarea"
+                            placeholder="Tell people exactly how to make it, step by step."></textarea>
+
+                        <div class="ui-inline-select-row mt-3">
+                            <label class="form-check-label" for="instruction-list-style">
+                                Listed with
+                            </label>
+                            <select id="instruction-list-style" class="form-select ui-input ui-select text-white"
+                                aria-label="Instruction list style">
+                                <option value="no-bullet">None</option>
+                                <option value="number-bullet">Numbers</option>
+                                <option value="dotted-bullet">Dots</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-form-section align-items-center">
+                    <div class="ui-form-section-head">
+                        <h2 class="ui-section-title mb-1">Video tutorial</h2>
+                        <p class="ui-help-text mb-0">Optional, but helpful if you want to share a walkthrough.</p>
+                    </div>
+                    <div class="ui-form-section-body">
+                        <label for="recipe-video" class="form-label">Video Tutorial</label>
+                        <input id="recipe-video" type="url" class="form-control ui-input"
+                            placeholder="https://www.youtube.com/watch?v=...">
+                        <p class="ui-help-text mb-0 mt-2">Paste a YouTube or other tutorial link if the recipe has one.</p>
+                    </div>
+                </div>
+
+                <div class="ui-form-actions">
+                    <button type="submit" class="btn btn-warning rounded-pill px-4 py-2 ui-action-strong">Save
+                        Recipe</button>
+                </div> -->
+            </div>
+        </form>
+    </div>
+
+    <div class="offcanvas offcanvas-end ui-offcanvas" tabindex="-1" id="ingredientsPanel">
+        <div class="offcanvas-header ui-offcanvas-header">
+            <div>
+                <p class="ui-kicker mb-2">Ingredient Builder</p>
+                <h5 class="mb-1">Ingredients</h5>
+                <p class="ui-muted ui-copy mb-0">Add the exact amount, unit, name, and optional image for each ingredient.</p>
+            </div>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body ui-offcanvas-body">
+            <div class="ui-note-card ui-note-card-compact">
+                <span class="ui-note-label">Builder tips</span>
+                <p class="ui-help-text mb-0">Use one row per ingredient. Amount and unit are optional, but the ingredient name is required before save.</p>
+            </div>
+
+            <div class="ui-toolbar align-items-center justify-content-between mb-3">
+                <span class="ui-count-label"><span id="ingredientsCount">1</span> <span
+                        id="ingredientsCountLabel">ingredient line</span></span>
+                <button class="btn btn-outline-light rounded-pill px-3 ui-toolbar-action" type="button" onclick="addRow()">
+                    <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                    <span>Add Ingredient</span>
+                </button>
+            </div>
+
+            <div id="ingredientsList">
+                <div class="ingredient-row ui-item-card">
+                    <div class="ui-ingredient-card">
+                        <div class="ui-ingredient-card-head">
+                            <div>
+                                <p class="ui-kicker ui-kicker-soft mb-1">Ingredient line</p>
+                                <h6 class="mb-0">Ingredient details</h6>
+                            </div>
+                            <button class="btn btn-outline-danger ui-icon-button ui-remove-button" type="button"
+                                onclick="removeRow(this)" aria-label="Remove ingredient">
+                                <i class="bi bi-trash3" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <div class="ui-ingredient-card-body">
+                            <div class="ui-ingredient-preview-panel">
+                                <div class="ui-inline-media-preview-wrap ui-ingredient-preview-wrap">
+                                    <img class="ui-inline-media-preview ingredient-thumb-preview"
+                                        src="../static/img/logo-white.png" alt="Ingredient thumbnail preview">
+                                </div>
+                                <span class="ui-ingredient-status ingredient-thumb-status">No image</span>
+                            </div>
+
+                            <div class="ui-ingredient-fields">
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Upload Thumbnail</label>
+                                        <input type="file" class="form-control ui-input ingredient-image-file"
+                                            accept="image/*">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label">Image Link</label>
+                                        <input type="url" class="form-control ui-input ingredient-image-url"
+                                            placeholder="https://example.com/ingredient.png">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="form-label">Amount</label>
+                                        <input type="number" class="form-control ui-input ingredient-amount-input"
+                                            placeholder="2" min="0" step="any">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label class="form-label">Measurement</label>
+                                        <select class="form-select ui-input ui-select ingredient-unit-input">
+                                            <option value="">Unit</option>
+                                            <option>tsp</option>
+                                            <option>tbsp</option>
+                                            <option>cup</option>
+                                            <option>ml</option>
+                                            <option>g</option>
+                                            <option>kg</option>
+                                            <option>pcs</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label class="form-label">Ingredient</label>
+                                        <input type="text" class="form-control ui-input ingredient-name-input"
+                                            placeholder="Flour">
+                                    </div>
+                                </div>
+
+                                <p class="ui-help-text mb-0">Upload a file or paste an image link. If you skip both, we'll use the ingredient preview when available.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bd-footer py-4 py-md-5 mt-5 bg-dark text-white">
+        <div class="container py-4 py-md-5 px-4 px-md-3">
+            <div class="row justify-content-center">
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://getbootstrap.com/">Home</a></li>
+                        <li class="mb-2"><a href="../../index.html">Docs</a></li>
+                        <li class="mb-2"><a href="../../examples/index.html">Examples</a></li>
+                        <li class="mb-2"><a href="https://icons.getbootstrap.com/">Icons</a></li>
+                        <li class="mb-2"><a href="https://themes.getbootstrap.com/">Themes</a></li>
+                        <li class="mb-2"><a href="https://blog.getbootstrap.com/">Blog</a></li>
+                        <li class="mb-2"><a href="https://cottonbureau.com/people/bootstrap">Swag Store</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Guides</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="../index.html">Getting started</a></li>
+                        <li class="mb-2"><a href="../../examples/starter-template/index.html">Starter template</a></li>
+                        <li class="mb-2"><a href="../webpack/index.html">Webpack</a></li>
+                        <li class="mb-2"><a href="../parcel/index.html">Parcel</a></li>
+                        <li class="mb-2"><a href="../vite/index.html">Vite</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Projects</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://github.com/twbs/bootstrap">Bootstrap 5</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/bootstrap/tree/v4-dev">Bootstrap 4</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/icons">Icons</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/rfs">RFS</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/examples/">Examples repo</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-lg-2 mb-3">
+                    <h5>Community</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://github.com/twbs/bootstrap/issues">Issues</a></li>
+                        <li class="mb-2"><a href="https://github.com/twbs/bootstrap/discussions">Discussions</a></li>
+                        <li class="mb-2"><a href="https://github.com/sponsors/twbs">Corporate sponsors</a></li>
+                        <li class="mb-2"><a href="https://opencollective.com/bootstrap">Open Collective</a></li>
+                        <li class="mb-2"><a href="https://stackoverflow.com/questions/tagged/bootstrap-5">Stack
+                                Overflow</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../static/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/meal.js"></script>
+    <script src="../static/js/regcheck.js"></script>
+    <script src="../static/js/create.js"></script>
+
+</body>
+
+</html>
